@@ -1,0 +1,36 @@
+{
+  "orders": [
+    {
+      "id": "ORD-1042",
+      "address_id": "ADDR-MEENAKSHI",
+      "customer_name": "Meenakshi",
+      "customer_lang_hint": "ta-IN",
+      "address_text": "Flat 3C, near Murugan temple, Chennai",
+      "items": "Medicines, 2 items",
+      "pin": {
+        "lat": 13.036,
+        "lon": 80.221
+      }
+    }
+  ],
+  "riders": [
+    {
+      "id": "R-RAHUL",
+      "name": "Rahul",
+      "lang": "hi-IN",
+      "from": "Bihar"
+    },
+    {
+      "id": "R-SOURAV",
+      "name": "Sourav",
+      "lang": "bn-IN",
+      "from": "West Bengal"
+    },
+    {
+      "id": "R-KARTHIK",
+      "name": "Karthik",
+      "lang": "ta-IN",
+      "from": "Tamil Nadu"
+    }
+  ]
+}

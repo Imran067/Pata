@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pata rider phone</title>
+  <meta name="color-scheme" content="light dark">
+  <script src="/static/js/theme.js"></script>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/rider.css">
+</head>
+<body class="rider-page">
+  <div class="rider-app">
+    <div id="map" class="rider-map" role="region" aria-label="Map around the delivery pin. Drag your dot to move."></div>
+
+    <div class="map-top">
+      <div id="modes" class="modes chip" aria-label="Model status"></div>
+    </div>
+
+    <div class="sim" role="group" aria-label="Move the rider">
+      <button id="walk" class="float-btn" type="button" title="Move 100 m toward the building"><span data-icon="bike"></span><span>Ride 100 m</span></button>
+      <button id="real-gps" class="float-btn" type="button" title="Follow this phone's GPS"><span data-icon="locate"></span><span>Use GPS</span></button>
+    </div>
+
+    <section id="sheet" class="sheet" aria-label="Call with the customer">
+      <button id="grabber" class="grabber" type="button" aria-label="Show more of the call" aria-expanded="false"><span></span></button>
+
+      <header class="sheet-head">
+        <span id="avatar" class="avatar" aria-hidden="true"></span>
+        <div class="head-text">
+          <h1 id="title">Delivery</h1>
+          <p id="subtitle"></p>
+        </div>
+        <button id="theme-btn" class="quiet icon-btn" type="button"></button>
+      </header>
+
+      <div id="start-card" class="start-card">
+        <p id="start-lead" class="lead">You're at the saved pin, and there's no building here.</p>
+        <p id="start-text">Start Pata to call the customer. You each speak your own language and Pata translates both ways.</p>
+        <button id="start" class="primary lg wide" type="button"><span data-icon="phone"></span><span>Start Pata</span></button>
+      </div>
+
+      <div id="now" class="now hidden" aria-live="polite">
+        <div id="gauge" class="gauge">
+          <span class="arrow" id="arrow" aria-hidden="true"><span data-icon="navigation"></span></span>
+          <div class="reading">
+            <p class="dist num"><span id="dist-value"></span><span id="dist-unit" class="unit"></span></p>
+            <p id="dist-dir" class="dir"></p>
+          </div>
+        </div>
+        <p id="now-text" class="now-text"></p>
+        <p id="now-gloss" class="now-gloss"></p>
+        <div class="now-actions">
+          <button id="repeat" type="button"><span data-icon="volume-2"></span><span>Repeat directions</span></button>
+          <button id="delivered" type="button" disabled><span data-icon="package"></span><span>Mark delivered</span></button>
+        </div>
+      </div>
+
+      <div class="sheet-scroll" id="scroller">
+        <p id="status" class="status" role="status"></p>
+        <ol id="log" class="log"></ol>
+      </div>
+
+      <footer class="talk-bar">
+        <div class="talk-row">
+          <button id="talk" class="talk primary" type="button" disabled>Talk to the customer</button>
+          <button id="type-toggle" class="type-toggle" type="button" aria-expanded="false" aria-controls="type-drawer" title="Type instead, or use a practice line" aria-label="Type instead, or use a practice line"><span data-icon="keyboard"></span></button>
+        </div>
+        <div id="type-drawer" class="type-drawer" hidden>
+          <form id="type-form" class="type-row">
+            <input id="type-input" type="text" autocomplete="off" placeholder="Type what you want to say" aria-label="Message to the customer">
+            <button type="submit" class="icon-btn" aria-label="Send"><span data-icon="send-horizontal"></span></button>
+          </form>
+          <p class="drawer-note">Practice lines skip speech recognition. Speak them for the real demo.</p>
+          <div id="chips" class="chips"></div>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+  <script src="/static/vendor/leaflet/leaflet.js"></script>
+  <script type="module" src="/static/js/rider.js"></script>
+</body>
+</html>

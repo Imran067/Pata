@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pata customer phone</title>
+  <meta name="color-scheme" content="light dark">
+  <script src="/static/js/theme.js"></script>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/customer.css">
+</head>
+<body class="customer-page">
+  <main class="call">
+    <section id="incoming" class="incoming" aria-label="Incoming call">
+      <p class="pata-chip"><span class="mini-mark" aria-hidden="true"></span><span id="pata-line"></span></p>
+      <div class="caller">
+        <div class="rings" aria-hidden="true">
+          <span></span><span></span><span></span>
+          <div id="avatar" class="big-avatar"></div>
+        </div>
+        <p id="partner" class="partner"></p>
+        <h1 id="caller"></h1>
+        <p id="calling" class="calling"></p>
+      </div>
+      <div class="answer-wrap">
+        <button id="answer" class="answer" type="button"><span data-icon="phone"></span></button>
+        <span id="answer-label" class="answer-label" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <section id="incall" class="incall hidden" aria-label="Call">
+      <header class="call-head">
+        <span id="incall-avatar" class="avatar" aria-hidden="true"></span>
+        <div class="head-text">
+          <h1 id="incall-name"></h1>
+          <p id="incall-sub" class="pata-sub"></p>
+        </div>
+        <span id="timer" class="timer num" aria-label="Call length">0:00</span>
+        <button id="theme-btn" class="quiet icon-btn" type="button"></button>
+      </header>
+
+      <div class="call-body" id="scroller">
+        <p id="status" class="status" role="status"></p>
+        <ol id="log" class="log"></ol>
+      </div>
+
+      <div id="pinfix" class="pinfix hidden" role="dialog" aria-labelledby="pinfix-text">
+        <span class="pinfix-ico" aria-hidden="true"><span data-icon="map-pin-check"></span></span>
+        <p id="pinfix-text" class="pinfix-text"></p>
+        <div class="pinfix-buttons">
+          <button id="pinfix-yes" class="primary" type="button"></button>
+          <button id="pinfix-no" type="button"></button>
+        </div>
+      </div>
+
+      <footer class="call-foot">
+        <div class="talk-row">
+          <button id="talk" class="talk primary" type="button"></button>
+          <button id="type-toggle" class="type-toggle" type="button" aria-expanded="false" aria-controls="type-drawer" title="Type instead, or use a practice line" aria-label="Type instead, or use a practice line"><span data-icon="keyboard"></span></button>
+        </div>
+        <div id="type-drawer" class="type-drawer" hidden>
+          <form id="type-form" class="type-row">
+            <input id="type-input" type="text" autocomplete="off" aria-label="Message to the rider">
+            <button type="submit" class="icon-btn" aria-label="Send"><span data-icon="send-horizontal"></span></button>
+          </form>
+          <p class="drawer-note">Practice lines skip speech recognition. Speak them for the real demo.</p>
+          <div id="chips" class="chips"></div>
+        </div>
+      </footer>
+    </section>
+  </main>
+  <script type="module" src="/static/js/customer.js"></script>
+</body>
+</html>

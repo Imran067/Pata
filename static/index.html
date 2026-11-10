@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pata control room</title>
+  <meta name="color-scheme" content="light dark">
+  <script src="/static/js/theme.js"></script>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/control.css">
+</head>
+<body class="room-page">
+  <header class="topbar">
+    <a class="brand" href="/" id="brand" aria-label="Pata control room"></a>
+    <span class="topbar-title">Control room</span>
+    <div class="topbar-end">
+      <div id="modes" class="modes" aria-label="Model status"></div>
+      <div id="theme"></div>
+    </div>
+  </header>
+
+  <main class="room">
+    <aside class="setup" aria-label="Demo setup">
+      <div class="setup-scroll">
+        <section class="block" aria-labelledby="h-customer">
+          <h2 id="h-customer">Customer</h2>
+          <label class="field">Name <input id="f-name" type="text" autocomplete="off"></label>
+          <label class="field">Address <input id="f-address" type="text" autocomplete="off"></label>
+          <label class="field">Order <input id="f-items" type="text" autocomplete="off"></label>
+          <div class="lang-row">
+            <label class="field">Speaks <select id="f-customer-lang"></select></label>
+            <label class="switch-row"><span>Detect automatically</span><input id="f-customer-auto" class="switch" type="checkbox"></label>
+          </div>
+        </section>
+
+        <section class="block" aria-labelledby="h-rider">
+          <h2 id="h-rider">Rider</h2>
+          <fieldset id="riders" class="riders"><legend class="sr-only">Who is delivering</legend></fieldset>
+          <div class="lang-row">
+            <label class="field">Speaks <select id="f-rider-lang"></select></label>
+            <label class="switch-row"><span>Detect automatically</span><input id="f-rider-auto" class="switch" type="checkbox"></label>
+          </div>
+          <p class="hint">Detect automatically lets Prisma work out each person's language on every turn. Leave it off for a reliable recording.</p>
+        </section>
+
+        <section class="block" aria-labelledby="h-places">
+          <h2 id="h-places">Places on the map</h2>
+          <div class="segmented wide-seg" role="radiogroup" aria-label="Which places Pata matches against">
+            <label><input type="radio" name="places" value="sample"><span>Sample places</span></label>
+            <label><input type="radio" name="places" value="osm"><span>From OpenStreetMap</span></label>
+          </div>
+          <p id="places-status" class="hint" aria-live="polite"></p>
+          <div class="added">
+            <h3>Places you added</h3>
+            <ul id="custom-places" class="custom-places"></ul>
+          </div>
+          <label class="switch-row hints-row">
+            <span>Give Prisma nearby place names as hints<small>Turn off to compare transcripts without hints.</small></span>
+            <input id="f-hints" class="switch" type="checkbox">
+          </label>
+        </section>
+      </div>
+
+      <footer class="setup-foot">
+        <p id="setup-status" class="status" role="status"></p>
+        <button id="start" class="primary lg wide" type="button"><span data-icon="phone"></span><span>Start a call session</span></button>
+        <div id="phones" class="phones hidden">
+          <div class="phone-row">
+            <a id="rider-link" class="phone-link" target="_blank" rel="noopener">
+              <span class="phone-ico"><span data-icon="bike"></span></span>
+              <span class="phone-text"><strong>Rider's phone</strong><small>Map, directions and talk button</small></span>
+              <span data-icon="arrow-up-right" class="i-sm open-ico"></span>
+            </a>
+            <button class="quiet icon-btn copy" type="button" data-copy="rider-link" title="Copy link" aria-label="Copy the rider's link"><span data-icon="copy" class="i-sm"></span></button>
+          </div>
+          <div class="phone-row">
+            <a id="customer-link" class="phone-link" target="_blank" rel="noopener">
+              <span class="phone-ico"><span data-icon="phone-incoming"></span></span>
+              <span class="phone-text"><strong>Customer's phone</strong><small>The incoming call, in their language</small></span>
+              <span data-icon="arrow-up-right" class="i-sm open-ico"></span>
+            </a>
+            <button class="quiet icon-btn copy" type="button" data-copy="customer-link" title="Copy link" aria-label="Copy the customer's link"><span data-icon="copy" class="i-sm"></span></button>
+          </div>
+          <p class="hint">Open each on its own device, or in two windows with headphones so one doesn't record the other.</p>
+        </div>
+      </footer>
+    </aside>
+
+    <section class="stage" aria-label="Map">
+      <div id="setup-map" class="stage-map" role="region" aria-label="Map with the customer's saved pin. Drag the pin or click the map to move it."></div>
+      <div class="map-tools" role="toolbar" aria-label="Map tools">
+        <button id="use-location" class="tool" type="button"><span data-icon="locate-fixed"></span><span>Use my location</span></button>
+        <button id="load-osm" class="tool" type="button"><span data-icon="layers"></span><span>Load real places around the pin</span></button>
+        <button id="add-place" class="tool" type="button"><span data-icon="plus"></span><span>Add a missing place</span></button>
+      </div>
+      <div id="adding-hint" class="map-hint hidden" role="status">
+        <span data-icon="map-pin"></span><span>Click where the place is on the map.</span>
+        <button id="cancel-add" class="quiet" type="button">Cancel</button>
+      </div>
+      <p class="map-tip" id="map-tip">Drag the saved pin, or click the map, to set where the customer's app thinks they are.</p>
+      <ul class="legend" aria-label="Map key">
+        <li><i class="k-pin"></i>Saved pin</li>
+        <li><i class="k-site"></i>Spot that fits the landmarks</li>
+        <li><i class="k-dest"></i>The customer's building</li>
+        <li><i class="k-rider"></i>Rider</li>
+        <li><i class="k-place"></i>Known place</li>
+        <li><i class="k-mine"></i>Added by you</li>
+      </ul>
+    </section>
+
+    <aside class="monitor" aria-label="Live call and doorstep notes">
+      <div class="tabs" role="tablist" aria-label="Monitor">
+        <button id="tab-call" class="tab" role="tab" aria-selected="true" aria-controls="panel-call" type="button">Live call<span id="live-dot" class="live-dot hidden" title="A call session is open"></span></button>
+        <button id="tab-notes" class="tab" role="tab" aria-selected="false" aria-controls="panel-notes" type="button">Doorstep notes<span id="notes-count" class="count hidden"></span></button>
+      </div>
+
+      <div id="panel-call" class="panel" role="tabpanel" aria-labelledby="tab-call">
+        <div id="people" class="people hidden"></div>
+        <p id="status" class="status call-status" role="status"></p>
+        <div class="log-scroll" id="log-scroll">
+          <div id="call-empty" class="empty-state">
+            <svg class="gap-art" viewBox="0 0 220 64" aria-hidden="true">
+              <path class="gap-dots" d="M30 48 C 74 50, 84 18, 124 20 S 176 32, 192 28"/>
+              <g transform="translate(18 24)"><path class="gap-pin" d="M10 0C4.5 0 0 4.4 0 9.8c0 6.6 7.7 14 9 15.3a1.4 1.4 0 0 0 2 0C12.3 23.8 20 16.4 20 9.8 20 4.4 15.5 0 10 0Z"/><circle cx="10" cy="9.6" r="3.3" class="gap-hole"/></g>
+              <g transform="translate(184 4)"><path class="gap-door" d="M10 0C4.5 0 0 4.4 0 9.8c0 6.6 7.7 14 9 15.3a1.4 1.4 0 0 0 2 0C12.3 23.8 20 16.4 20 9.8 20 4.4 15.5 0 10 0Z"/><circle cx="10" cy="9.6" r="3.3" class="gap-hole"/></g>
+            </svg>
+            <h3>No call yet</h3>
+            <p>Start a call session, then open both phones. Every turn shows up here with the model that handled it.</p>
+          </div>
+          <ol id="log" class="log"></ol>
+        </div>
+      </div>
+
+      <div id="panel-notes" class="panel" role="tabpanel" aria-labelledby="tab-notes" hidden>
+        <div class="notes-head">
+          <p>What riders learned about each address. The next rider hears it before calling.</p>
+          <button id="clear-notes" class="quiet" type="button"><span data-icon="eraser" class="i-sm"></span><span>Clear doorstep notes</span></button>
+        </div>
+        <div id="notes" class="notes"></div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/static/vendor/leaflet/leaflet.js"></script>
+  <script type="module" src="/static/js/control.js"></script>
+</body>
+</html>

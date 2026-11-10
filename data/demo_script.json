@@ -1,0 +1,35 @@
+{
+  "note": "The lines for the demo video. In live mode, say them out loud. The 'translations' are only used by mock mode; in live mode Evon writes the translation. Have a native speaker check every line.",
+  "lines": [
+    {
+      "id": "r1", "role": "rider", "lang": "hi-IN",
+      "text": "मैडम, मैं पिन वाली जगह पे खड़ा हूँ, यहाँ कोई बिल्डिंग नहीं दिख रही। आपका घर कहाँ है?",
+      "gloss_en": "Madam, I'm standing at your pin and can't see any building. Where is your house?",
+      "translations": {"ta-IN": "டெலிவரி செய்பவர் நீங்கள் குறித்த இடத்தில் இருக்கிறார், ஆனால் கட்டிடம் தெரியவில்லை. உங்கள் வீடு எங்கே இருக்கிறது?"}
+    },
+    {
+      "id": "c1", "role": "customer", "lang": "ta-IN",
+      "text": "முருகன் கோவில் எதிரே, அப்போலோ பார்மசி பக்கத்துல, பச்சை கலர் பில்டிங். பின்னாடி கேட் வழியா வாங்க, மூணாவது மாடி.",
+      "gloss_en": "Opposite the Murugan temple, next to Apollo Pharmacy, the green building. Come through the back gate, third floor.",
+      "translations": {"hi-IN": "हरी बिल्डिंग, मुरुगन मंदिर के सामने, अपोलो फ़ार्मेसी के बगल में। पीछे वाले गेट से आइए, तीसरी मंज़िल।"}
+    },
+    {
+      "id": "c2", "role": "customer", "lang": "ta-IN",
+      "text": "பஸ் ஸ்டாப் பக்கத்துல.",
+      "gloss_en": "Near the bus stop.",
+      "translations": {"hi-IN": "बस स्टॉप के पास।"}
+    },
+    {
+      "id": "r2", "role": "rider", "lang": "hi-IN",
+      "text": "ठीक है मैडम, मैं आ रहा हूँ।",
+      "gloss_en": "Okay madam, I'm coming.",
+      "translations": {"ta-IN": "சரி மேடம், நான் வந்துகொண்டிருக்கிறேன்."}
+    },
+    {
+      "id": "c3", "role": "customer", "lang": "ta-IN",
+      "text": "சரி, பின்னாடி கேட் திறந்திருக்கும்.",
+      "gloss_en": "Okay, the back gate will be open.",
+      "translations": {"hi-IN": "ठीक है, पीछे वाला गेट खुला रहेगा।"}
+    }
+  ]
+}

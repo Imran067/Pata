@@ -1,0 +1,43 @@
+{
+  "area_name": "Demo neighbourhood, Chennai (sample data: replace with your own area)",
+  "note": "Hand-made sample places. Two spots both have a Murugan temple next to an Apollo Pharmacy, so Pata has to ask a question to tell them apart. Run scripts/fetch_osm_places.py to load real places for your own demo area.",
+  "places": [
+    {"id": "p01", "name": "Lakshmi Tiffin Centre", "kind": "restaurant", "lat": 13.03630, "lon": 80.22060,
+     "local_names": {"ta-IN": "லட்சுமி டிபன் சென்டர்"}},
+    {"id": "p02", "name": "Corporation Primary School", "kind": "school", "lat": 13.03560, "lon": 80.22150,
+     "local_names": {"ta-IN": "மாநகராட்சி தொடக்கப் பள்ளி"}},
+    {"id": "p03", "name": "Sri Ganesh Stores", "kind": "shop", "lat": 13.03585, "lon": 80.22080,
+     "local_names": {"ta-IN": "ஸ்ரீ கணேஷ் ஸ்டோர்ஸ்"}},
+
+    {"id": "a1", "name": "Arulmigu Murugan Temple", "kind": "temple", "lat": 13.04012, "lon": 80.22088,
+     "local_names": {"ta-IN": "அருள்மிகு முருகன் கோவில்"}},
+    {"id": "a2", "name": "Apollo Pharmacy", "kind": "pharmacy", "lat": 13.03998, "lon": 80.22118,
+     "local_names": {"ta-IN": "அப்போலோ பார்மசி"}},
+    {"id": "a3", "name": "Market Road Bus Stop", "kind": "bus_stop", "lat": 13.03985, "lon": 80.22068,
+     "local_names": {"ta-IN": "மார்க்கெட் ரோடு பஸ் ஸ்டாப்"}},
+    {"id": "a4", "name": "Lotus Apartments", "kind": "building", "lat": 13.04002, "lon": 80.22132,
+     "local_names": {"ta-IN": "லோட்டஸ் அபார்ட்மென்ட்ஸ்"}},
+
+    {"id": "b1", "name": "Sri Murugan Temple", "kind": "temple", "lat": 13.03608, "lon": 80.22828,
+     "local_names": {"ta-IN": "ஸ்ரீ முருகன் கோவில்"}},
+    {"id": "b2", "name": "Apollo Pharmacy", "kind": "pharmacy", "lat": 13.03592, "lon": 80.22856,
+     "local_names": {"ta-IN": "அப்போலோ பார்மசி"}},
+    {"id": "b3", "name": "Raja Fuels Petrol Bunk", "kind": "petrol_pump", "lat": 13.03625, "lon": 80.22872,
+     "local_names": {"ta-IN": "ராஜா பெட்ரோல் பங்க்"}},
+    {"id": "b4", "name": "Sai Residency", "kind": "building", "lat": 13.03588, "lon": 80.22880,
+     "local_names": {"ta-IN": "சாய் ரெசிடென்சி"}},
+
+    {"id": "d1", "name": "Vinayagar Temple", "kind": "temple", "lat": 13.03320, "lon": 80.22180,
+     "local_names": {"ta-IN": "விநாயகர் கோவில்"}},
+    {"id": "d2", "name": "Kumar Medicals", "kind": "pharmacy", "lat": 13.03540, "lon": 80.21820,
+     "local_names": {"ta-IN": "குமார் மெடிக்கல்ஸ்"}},
+    {"id": "d3", "name": "Gandhi Park", "kind": "park", "lat": 13.03800, "lon": 80.21900,
+     "local_names": {"ta-IN": "காந்தி பூங்கா"}},
+    {"id": "d4", "name": "St. Mary's Church", "kind": "church", "lat": 13.03250, "lon": 80.22600,
+     "local_names": {"ta-IN": "புனித மேரி தேவாலயம்"}},
+    {"id": "d5", "name": "Masjid-e-Noor", "kind": "mosque", "lat": 13.03900, "lon": 80.22500,
+     "local_names": {"ta-IN": "மஸ்ஜித்-இ-நூர்"}},
+    {"id": "d6", "name": "Sri Ram Hospital", "kind": "hospital", "lat": 13.03450, "lon": 80.22450,
+     "local_names": {"ta-IN": "ஸ்ரீ ராம் மருத்துவமனை"}}
+  ]
+}

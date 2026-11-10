@@ -1,0 +1,140 @@
+/* Customer phone: often an older person who may not read English. Very large text, one action at a
+   time, and an incoming call that looks and behaves like a phone ringing. */
+
+.customer-page { overflow: hidden; }
+.call { position: fixed; inset: 0; display: flex; justify-content: center; background: var(--bg); }
+.incoming, .incall { width: 100%; max-width: 520px; height: 100%; }
+
+/* ------------------------------------------------------------------ incoming */
+
+.incoming {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  justify-items: center;
+  padding: calc(env(safe-area-inset-top, 0px) + 28px) 24px calc(env(safe-area-inset-bottom, 0px) + 48px);
+  text-align: center;
+  position: relative;
+}
+/* a sodium lamp overhead: the only gradient in the product, and it is light, not decoration */
+.incoming::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(60% 42% at 50% 38%, var(--amber-soft), transparent 70%);
+  pointer-events: none;
+}
+.pata-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 14px 7px 10px;
+  font-size: var(--t-sm); color: var(--ink-2);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.mini-mark { width: 9px; height: 9px; border-radius: 50%; background: var(--amber); box-shadow: -7px 5px 0 -2.5px var(--ink-3), -12px 9px 0 -3px var(--ink-3); margin-left: 12px; }
+
+.caller { align-self: center; display: grid; justify-items: center; gap: 6px; }
+.rings { position: relative; width: 132px; height: 132px; margin-bottom: 28px; display: grid; place-items: center; }
+.rings > span {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--amber);
+  opacity: 0;
+  animation: ring 2.4s var(--ease) infinite;
+}
+.rings > span:nth-child(2) { animation-delay: 0.8s; }
+.rings > span:nth-child(3) { animation-delay: 1.6s; }
+@keyframes ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+.big-avatar {
+  position: relative;
+  width: 132px; height: 132px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 3.25rem; font-weight: 600; letter-spacing: -0.03em;
+  color: var(--on-amber);
+  background: var(--amber);
+  box-shadow: 0 0 0 8px var(--amber-soft);
+  animation: nudge 2.4s var(--ease) infinite;
+}
+@keyframes nudge { 0%, 70%, 100% { transform: none; } 76% { transform: rotate(-4deg); } 82% { transform: rotate(4deg); } 88% { transform: rotate(-2deg); } }
+.partner { font-size: var(--t-lg); color: var(--ink-2); }
+.incoming h1 { font-size: var(--t-3xl); letter-spacing: -0.035em; line-height: 1.05; }
+.calling { font-size: var(--t-lg); color: var(--ink-2); max-width: 22ch; }
+
+.answer-wrap { display: grid; justify-items: center; gap: 12px; }
+.answer {
+  width: 84px; height: 84px; padding: 0;
+  border-radius: 50%;
+  color: var(--on-amber); background: var(--amber); border: 0;
+  box-shadow: 0 10px 30px -8px color-mix(in srgb, var(--amber) 70%, transparent);
+  animation: bob 2.4s var(--ease) infinite;
+}
+.answer .i { width: 34px; height: 34px; fill: currentColor; stroke-width: 1.4; }
+.answer:hover:not(:disabled) { background: var(--amber-hover); }
+.answer:active:not(:disabled) { transform: scale(0.96); }
+@keyframes bob { 0%, 70%, 100% { transform: none; } 80% { transform: translateY(-5px); } 90% { transform: translateY(0); } }
+.answer-label { font-size: var(--t-lg); font-weight: 600; }
+
+/* ------------------------------------------------------------------ in the call */
+
+.incall { display: flex; flex-direction: column; background: var(--surface); --log-bg: var(--surface); }
+@media (min-width: 521px) { .incall { border-left: 1px solid var(--line); border-right: 1px solid var(--line); } }
+.call-head {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: calc(env(safe-area-inset-top, 0px) + 16px) 12px 16px 20px;
+  border-bottom: 1px solid var(--line);
+  flex: none;
+}
+.call-head .avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: var(--t-lg); font-weight: 600;
+  color: var(--on-amber); background: var(--amber);
+}
+.call-head h1 { font-size: var(--t-xl); letter-spacing: -0.02em; }
+.pata-sub { display: flex; align-items: center; gap: 8px; font-size: var(--t-sm); color: var(--ink-2); }
+.pata-sub::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 3px var(--amber-soft); flex: none; }
+.timer { font-size: var(--t-md); color: var(--ink-2); font-weight: 500; }
+
+.call-body {
+  flex: 1; min-height: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  padding: 24px 20px;
+  display: grid; align-content: start; gap: 16px;
+}
+.call-body .log { --text: 1.375rem; --node: 30px; gap: 24px; }
+.call-body .log .main { line-height: 1.5; font-weight: 500; }
+.call-body .msg.mine .main { font-size: var(--t-lg); font-weight: 400; }
+.call-body .who { font-size: var(--t-sm); }
+.call-body .node { font-size: var(--t-xs); }
+.call-body .node .i { width: 15px; height: 15px; }
+.call-body .status { font-size: var(--t-md); }
+
+/* Pata asks about moving the saved location: the one decision she makes, so it takes the stage */
+.pinfix {
+  flex: none;
+  display: grid; gap: 14px;
+  margin: 0 12px 12px;
+  padding: 20px;
+  background: var(--sunken);
+  border: 1px solid var(--amber-line);
+  border-radius: 18px;
+  animation: msg-in var(--slow) var(--ease);
+}
+.pinfix-ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; color: var(--green); background: var(--green-soft); }
+.pinfix-ico .i { width: 24px; height: 24px; }
+.pinfix-text { font-size: var(--t-lg); font-weight: 500; line-height: 1.5; }
+.pinfix-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pinfix-buttons button { --h: 60px; font-size: var(--t-lg); border-radius: 14px; }
+
+.call-foot {
+  flex: none;
+  padding: 14px 16px calc(env(safe-area-inset-bottom, 0px) + 16px);
+  border-top: 1px solid var(--line);
+}
+.call-foot .talk { --h: 72px; font-size: var(--t-lg); }
+.call-foot .type-toggle { --h: 72px; width: 72px; }
